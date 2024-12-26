@@ -17,6 +17,8 @@ const routes = [
   { path: "/signin", name: "Signin", component: Signin },
   { path: "/movie/:id", name: "MovieDetail", component: MovieDetail }, // 영화 상세 페이지
   { path: "/signup", name: "Signup", component: Signup },
+  //   추가
+  { path: "/oauth", component: () => import("../views/OAuthHandler.vue") },
 ];
 
 const router = createRouter({

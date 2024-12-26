@@ -1,3 +1,4 @@
+
 <template>
   <header class="header">
     <div class="logo" @click="$router.push('/')">
@@ -9,8 +10,11 @@
       <router-link to="/search">찾아보기</router-link>
       <router-link to="/wishlist">내가 찜한 리스트</router-link>
     </nav>
-    <div class="user-icon" @click="$router.push('/signin')">
-      <i class="fas fa-user"></i>
+    <div class="user-actions">
+      <div class="user-icon" @click="$router.push('/signin')">
+        <i class="fas fa-user"></i>
+      </div>
+      <button class="logout-button" @click="logout">로그아웃</button>
     </div>
   </header>
 </template>
@@ -18,6 +22,14 @@
 <script>
 export default {
   name: "Header",
+  methods: {
+    logout() {
+      // 로그아웃 로직 (예: 토큰 제거, 세션 초기화 등)
+      localStorage.removeItem("authToken"); // 예: 로컬 스토리지에서 토큰 제거
+      alert("로그아웃 되었습니다."); // 알림 메시지
+      this.$router.push("/signin"); // 로그인 페이지로 이동
+    },
+  },
 };
 </script>
 
@@ -54,6 +66,12 @@ nav a:hover {
   transform: scale(1.1); /* 약간 커지는 효과 */
 }
 
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .user-icon {
   cursor: pointer;
   transition: transform 0.3s, filter 0.3s;
@@ -64,13 +82,18 @@ nav a:hover {
   filter: brightness(1.5); /* 밝게 빛나는 효과 */
 }
 
-.logo {
+.logout-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
   cursor: pointer;
-  transition: transform 0.3s, filter 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
 
-.logo:hover {
-  transform: scale(1.2); /* 로고 확대 효과 */
-  filter: brightness(1.5); /* 밝게 빛나는 효과 */
+.logout-button:hover {
+  background-color: white;
+  color: #111;
+  transform: scale(1.1); /* 약간 커지는 효과 */
 }
 </style>
